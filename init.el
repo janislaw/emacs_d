@@ -172,9 +172,6 @@
 (fset 'milestones
    [?\C-\M-% ?\[ ?\[ ?: ?d ?i ?g ?i ?t ?: ?\] ?\] ?  left left left left left left left left left left left left ?\\ ?\( right right right right right right right right right right right ?\\ ?\) right return ?\\ ?1 ?\C-q tab return ?! C-home ?\M-% ?  ?\( return ?\C-q tab return ?! C-home ?\M-% ?\) return return ?!])
 
-(require 'yasnippet)
-
-
 (setenv "PYTHONPATH" "/home/janislaw/projekty/bag:/home/janislaw/projekty/sslcacmbotohl")
 ;(setenv "PATH" (concat "D:\\projekty\\bag;" (getenv "PATH")))
 
