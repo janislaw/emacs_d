@@ -34,11 +34,6 @@
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
 
-;; start server
-
-(require 'server)
-(server-start)
-
 ;; python
 
 (setenv "PYTHONUNBUFFERED" "TRUE") ; I like it that way
@@ -172,14 +167,24 @@
 (fset 'milestones
    [?\C-\M-% ?\[ ?\[ ?: ?d ?i ?g ?i ?t ?: ?\] ?\] ?  left left left left left left left left left left left left ?\\ ?\( right right right right right right right right right right right ?\\ ?\) right return ?\\ ?1 ?\C-q tab return ?! C-home ?\M-% ?  ?\( return ?\C-q tab return ?! C-home ?\M-% ?\) return return ?!])
 
-(require 'yasnippet)
-
-
-(setenv "PYTHONPATH" "/home/janislaw/projekty/bag:/home/janislaw/projekty/sslcacmbotohl")
-;(setenv "PATH" (concat "D:\\projekty\\bag;" (getenv "PATH")))
-
 (setq load-path (cons "~/.emacs.d" load-path))
+
+(autoload 'reftex-mode    "reftex" "RefTeX Minor Mode" t)
+(autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" t)
+
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex) ; with AUCTeX LaTeX mode
+;  (add-hook 'latex-mode-hook 'turn-on-reftex)) ; with Emacs latex mode
+
+;(desktop-save-mode 1)
+;(add-hook 'auto-save-hook (lambda () (desktop-save-in-desktop-dir)))
 
 (if (equal window-system 'w32)
     (load "windows")
   (load "linux"))
+
+(load "work")
+
+;; start server
+
+(require 'server)
+(server-start)
