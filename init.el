@@ -146,7 +146,6 @@
 (setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
-
 ;; count words
 (defun count-words (&optional begin end) ;; from http://emacs-fu.blogspot.com/2009/01/counting-words.html
   "count words between BEGIN and END (region); if no region defined, count words in buffer"
@@ -155,33 +154,37 @@
       (e (if mark-active end (point-max))))
     (message "Word count: %s" (how-many "\\w+" b e))))
 
-;; my macros
-(fset 'c-include
-   [?# ?i ?n ?c ?l ?u ?d ?e ?  ?< ?> left])
-(fset 'c-main
-   [?i ?n ?t ?  ?m ?a ?i ?n ?\( ?i ?n ?t ?  ?a ?r ?g ?c ?, ?  ?c ?h ?a ?r ?* ?  ?a ?r ?g ?v ?\[ ?\] ?\) ?\{ return return ?\} up tab ?r ?e ?t ?u ?r ?n ?  ?0 ?\; up end return tab])
-(fset 'py-main
-   [?# ?! ?/ ?u ?s ?r ?/ ?b ?i ?n ?/ ?p ?y ?t ?h ?o ?n return ?# ?  ?- ?* ?- ?  ?c ?o ?d ?i ?n ?g ?: ?  ?u ?t ?f ?- ?8 ?  ?- ?* ?- return return ?d ?e ?f ?  ?m ?a ?i ?n ?\( ?\) ?: return ?p ?a ?s ?s return return ?i ?f ?  ?_ ?_ ?n ?a ?m ?e ?_ ?_ ?  ?= ?= ?  ?\' ?_ ?_ ?m ?a ?i ?n ?_ ?_ ?\' ?: return ?m ?a ?i ?n ?\( ?\) return backspace])
-(fset 'c-stdio
-   "#include <stdio.h>")
-(fset 'milestones
-   [?\C-\M-% ?\[ ?\[ ?: ?d ?i ?g ?i ?t ?: ?\] ?\] ?  left left left left left left left left left left left left ?\\ ?\( right right right right right right right right right right right ?\\ ?\) right return ?\\ ?1 ?\C-q tab return ?! C-home ?\M-% ?  ?\( return ?\C-q tab return ?! C-home ?\M-% ?\) return return ?!])
-
-(setq load-path (cons "~/.emacs.d" load-path))
+;; slick copy/paste
+(defadvice kill-ring-save (before slick-copy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (message "Copied line")
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
 
 (autoload 'reftex-mode    "reftex" "RefTeX Minor Mode" t)
 (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" t)
 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex) ; with AUCTeX LaTeX mode
-;  (add-hook 'latex-mode-hook 'turn-on-reftex)) ; with Emacs latex mode
+;(add-hook 'latex-mode-hook 'turn-on-reftex)) ; with Emacs latex mode
 
 ;(desktop-save-mode 1)
 ;(add-hook 'auto-save-hook (lambda () (desktop-save-in-desktop-dir)))
+
+(setq load-path (cons "~/.emacs.d" load-path))
 
 (if (equal window-system 'w32)
     (load "windows")
   (load "linux"))
 
+(load "mymacros")
 (load "work")
 
 ;; start server
