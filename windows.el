@@ -47,3 +47,4 @@
 
 
 
+(setq temporary-file-directory "C:/Temp/emacsbackups"")
