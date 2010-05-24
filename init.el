@@ -103,18 +103,6 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 
-;; spice-mode
-
-(autoload 'spice-mode "spice-mode" "Spice/Layla Editing Mode" t)
-(setq auto-mode-alist (append (list (cons "\\.sp$" 'spice-mode)
-				       (cons "\\.cir$" 'spice-mode)
-				       (cons "\\.ckt$" 'spice-mode)
-				       (cons "\\.mod$" 'spice-mode)
-				       (cons "\\.cdl$" 'spice-mode)
-				       (cons "\\.chi$" 'spice-mode) ;eldo outpt
-				       (cons "\\.inp$" 'spice-mode))
-				 auto-mode-alist))
-
 ;; CUA
  (setq org-CUA-compatible t)
 
@@ -172,8 +160,6 @@
 (autoload 'reftex-mode    "reftex" "RefTeX Minor Mode" t)
 (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" t)
 
-
-
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex) ; with AUCTeX LaTeX mode
 ;(add-hook 'latex-mode-hook 'turn-on-reftex)) ; with Emacs latex mode
 
@@ -202,7 +188,6 @@
                   week))
       (message file)
       (delete-file file))))
-
 
 (load "mymacros")
 (load "work")
