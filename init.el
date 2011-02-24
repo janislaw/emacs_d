@@ -87,6 +87,7 @@
   ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(cua-mode t nil (cua-base))
+ '(dict-servers (quote ("localhost")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
@@ -165,6 +166,18 @@
 
 ;(desktop-save-mode 1)
 ;(add-hook 'auto-save-hook (lambda () (desktop-save-in-desktop-dir)))
+
+;; lua mode
+
+(setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+
+;If you want colorization, turn on global-font-lock or add this:
+(add-hook 'lua-mode-hook 'turn-on-font-lock)
+
+;If you want to use hideshow, turn on hs-minor-mode or add this:
+(add-hook 'lua-mode-hook 'hs-minor-mode)
+
 
 (setq load-path (cons "~/.emacs.d" load-path))
 
