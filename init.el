@@ -74,8 +74,8 @@
 
 ;; ipython
 
-;(setq ipython-command "C:\\Python26\\Scripts\\ipython")
-;(require 'ipython)
+(setq ipython-command "ipython")
+(require 'ipython)
 
 
 ;; end of hand customizations
@@ -88,11 +88,15 @@
  '(column-number-mode t)
  '(cua-mode t nil (cua-base))
  '(dict-servers (quote ("localhost")))
+;; "dict.org" "alt0.dict.org" "alt1.dict.org" "alt2.dict.org")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
+ '(nxml-bind-meta-tab-to-complete-flag t)
+ '(org-export-language-setup (quote (("en" "Author" "Date" "Table of Contents" "Footnotes") ("ca" "Autor" "Data" "&Iacute;ndex" "Peus de p&agrave;gina") ("cs" "Autor" "Datum" "Obsah" "Pozn\341mky pod carou") ("da" "Ophavsmand" "Dato" "Indhold" "Fodnoter") ("de" "Autor" "Datum" "Inhaltsverzeichnis" "Fu&szlig;noten") ("eo" "A&#365;toro" "Dato" "Enhavo" "Piednotoj") ("es" "Autor" "Fecha" "&Iacute;ndice" "Pies de p&aacute;gina") ("fi" "Tekij&auml;" "P&auml;iv&auml;m&auml;&auml;r&auml;" "Sis&auml;llysluettelo" "Alaviitteet") ("fr" "Auteur" "Date" "Table des mati&egrave;res" "Notes de bas de page") ("hu" "Szerz&otilde;" "D&aacute;tum" "Tartalomjegyz&eacute;k" "L&aacute;bjegyzet") ("is" "H&ouml;fundur" "Dagsetning" "Efnisyfirlit" "Aftanm&aacute;lsgreinar") ("it" "Autore" "Data" "Indice" "Note a pi&egrave; di pagina") ("nl" "Auteur" "Datum" "Inhoudsopgave" "Voetnoten") ("no" "Forfatter" "Dato" "Innhold" "Fotnoter") ("nb" "Forfatter" "Dato" "Innhold" "Fotnoter") ("nn" "Forfattar" "Dato" "Innhald" "Fotnotar") ("pl" "Autor" "Data" "Spis treści" "Przypisy") ("sv" "F&ouml;rfattare" "Datum" "Inneh&aring;ll" "Fotnoter"))))
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
+ '(show-paren-mode t)
  '(tab-width 4)
  '(transient-mark-mode t))
 (custom-set-faces
@@ -201,6 +205,12 @@
                   week))
       (message file)
       (delete-file file))))
+
+;; save history between sessions
+(setq savehist-additional-variables    ;; also save...
+  '(search-ring regexp-search-ring compile-history)    ;; search and history
+  savehist-file "~/.emacs.d/savehist") ;; where to save
+(savehist-mode t)                      ;; do customization before activate
 
 (load "mymacros")
 (load "work")
