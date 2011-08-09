@@ -11,3 +11,5 @@
 
 (setq temporary-file-directory "~/.emacsbackups")
 
+(setq TeX-view-program-list '(("Evince" "evince --page-index=%(outpage) %o")))
+(setq TeX-view-program-selection '((output-pdf "Evince")))

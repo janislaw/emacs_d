@@ -94,6 +94,9 @@ This command does the reverse of `fill-region'."
 (require 'ipython)
 
 
+(require 'google-c-style)
+
+
 ;; end of hand customizations
 
 (custom-set-variables
@@ -198,6 +201,11 @@ This command does the reverse of `fill-region'."
 ;If you want to use hideshow, turn on hs-minor-mode or add this:
 (add-hook 'lua-mode-hook 'hs-minor-mode)
 
+;; java
+
+(add-hook 'java-mode-hook (lambda () (local-set-key (kbd "C-<tab>") 'java-complete)))
+
+;;
 
 (setq load-path (cons "~/.emacs.d" load-path))
 
