@@ -94,7 +94,6 @@ This command does the reverse of `fill-region'."
 (require 'ipython)
 
 
-(require 'google-c-style)
 
 
 ;; end of hand customizations
