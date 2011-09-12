@@ -84,6 +84,44 @@ This command does the reverse of `fill-region'."
            (line-beginning-position 2)))))
 
 
+;; at last:
+
+(toggle-uniquify-buffer-names)
+
+(defun gtfo ()
+  "Remove friendly decorations"
+  (interactive)
+  (menu-bar-mode -1)
+  (when window-system
+    (tool-bar-mode -1))
+  (scroll-bar-mode -1))
+
+
+(defun cpp-guard ()
+  (interactive)
+  (if (buffer-file-name)
+      (let*
+          ((fName (upcase (file-name-nondirectory (file-name-sans-extension buffer-file-name))))
+           (ifDef (concat "#ifndef " fName "_H" "\n#define " fName "_H" "\n"))
+           (begin (point-marker)))
+        (progn ; If less then 5 characters are in the buffer, insert the class definition
+          (if (< (- (point-max) (point-min)) 5 )
+              (progn
+                (insert "\nclass " (capitalize fName) "{\npublic:\n\nprivate:\n\n};\n")
+                (goto-char (point-min))
+                (next-line-nomark 3)
+                (setq begin (point-marker))))
+                                        ;Insert the Header Guard
+          (goto-char (point-min))
+          (insert ifDef)
+          (goto-char (point-max))
+          (insert "\n#endif" " //" fName "_H")
+          (goto-char begin)))
+                                        ;else
+    (message (concat "Buffer " (buffer-name) " must have a filename"))))
+
+(global-linum-mode 1)
+
 ;;
 
 (put 'downcase-region 'disabled nil)
@@ -92,6 +130,7 @@ This command does the reverse of `fill-region'."
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq load-path (cons "~/.emacs.d" load-path))
+(setq load-path (cons "~/.emacs.d/local" load-path))
 
 (if (equal window-system 'w32)
     (load "windows")
