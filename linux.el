@@ -1,7 +1,8 @@
 ;; This only worked for a frame
 (set-default-font "Monospace-10")
 ;; This should work for everything
-(set-face-attribute 'default nil :font "Monospace-10")
+(when window-system
+  (set-face-attribute 'default nil :font "Monospace-10"))
 
 (setq ispell-program-name "aspell")
 (setq ispell-extra-args '("--sug-mode=ultra"))

@@ -142,6 +142,9 @@ This command does the reverse of `fill-region'."
       `((".*" ,temporary-file-directory t)))
 (message "Deleting old backup files...")
 
+; Define M-g as goto-line
+(global-set-key "\M-g" 'goto-line)
+
 (load "line-moving")
 (load "python-setup")
 (load "history-setup")

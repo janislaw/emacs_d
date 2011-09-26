@@ -32,7 +32,6 @@
     (setq ropemacs-confirm-saving 'nil)
   )
 
-
 ;;(eval-after-load "pymacs"
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
